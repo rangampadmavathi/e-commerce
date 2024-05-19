@@ -1,0 +1,66 @@
+@Entity
+public class User {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String username;
+    private String password;
+    private String email;
+    // getters and setters
+}
+
+@Entity
+public class Product {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String description;
+    private BigDecimal price;
+    private String category;
+    private String imageUrl;
+    // getters and setters
+}
+
+@Entity
+public class Cart {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    private User user;
+    // getters and setters
+}
+
+@Entity
+public class CartItem {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    private Cart cart;
+    @ManyToOne
+    private Product product;
+    private int quantity;
+    // getters and setters
+}
+
+@Entity
+public class Order {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    private User user;
+    private BigDecimal total;
+    private Timestamp createdAt;
+    // getters and setters
+}
+
+@Entity
+public class OrderItem {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    private Order order;
+    @ManyToOne
+    private Product product;
+    private int quantity;
+    private BigDecimal price;
+    // getters and setters
+}
